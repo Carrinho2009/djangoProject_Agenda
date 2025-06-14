@@ -39,8 +39,8 @@ class Contato(ModelBase):
         null=False
     )
 
-def __str__(self):
-    return f'{self.name} - {self.age}'
+    def __str__(self):
+        return f'{self.name} - {self.age}'
 
 
 class Email(ModelBase):
@@ -65,58 +65,58 @@ class Email(ModelBase):
         return f'{self.dominio} - {self.email}'
 
 class Telefone(ModelBase):
-   Contato = models.ForeignKey(
+   contato = models.ForeignKey(
        Contato,
        db_column='tx_contato',
        null=False,
-       on_delete=models.CASCADE
+       default=1,
+       on_delete=models.DO_NOTHING
    )
    email = models.ForeignKey(
        Email,
        db_column='tx_email',
        null=False,
-       on_delete=models.CASCADE
+       on_delete=models.DO_NOTHING
    )
    codigo_telefone = models.CharField(
        db_column='tx_codigo_telefone',
        max_length=2,
        null=False
    )
-   NumeroTelefone = models.IntegerField(
+   NumeroTelefone = models.BigIntegerField(
        db_column='tx_numero_telefone',
-       max_length=11,
        null=False
    )
 
    def __str__(self):
         return f'{self.id} - {self.codigo_telefone} - {self.NumeroTelefone}'
 
-class Emergencia(ModelBase):
-    Contato = models.ForeignKey(
-        Contato,
-        db_column='tx_contato',
-        null=False,
-        on_delete=models.CASCADE
-    )
-    Email = models.ForeignKey(
-        Email,
-        db_column='tx_email',
-        null=False,
-        on_delete=models.CASCADE
-    )
-    Telefone = models.ForeignKey(
-        Telefone,
-        db_column='tx_telefone',
-        null=False,
-        on_delete=models.CASCADE
-    )
-    Parentesco = models.IntegerField(
-        db_column='tx_parentesco',
-        max_length=16,
-        null=False,
-    )
-
-    def __str__(self):
-        return f'{self.id} - {self.Email} - {self.Telefone} - {self.Parentesco}'
+# class Emergencia(ModelBase):
+#     Contato = models.ForeignKey(
+#         Contato,
+#         db_column='tx_contato',
+#         null=False,
+#         on_delete=models.CASCADE
+#     )
+#     Email = models.ForeignKey(
+#         Email,
+#         db_column='tx_email',
+#         null=False,
+#         on_delete=models.CASCADE
+#     )
+#     Telefone = models.ForeignKey(
+#         Telefone,
+#         db_column='tx_telefone',
+#         null=False,
+#         on_delete=models.CASCADE
+#     )
+#     Parentesco = models.CharField(
+#         db_column='tx_parentesco',
+#         max_length=16,
+#         null=False,
+#     )
+#
+#     def __str__(self):
+#         return f'{self.id} - {self.Email} - {self.Telefone} - {self.Parentesco}'
 
 #Contato, on_delete=models.CASCADE

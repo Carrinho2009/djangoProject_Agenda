@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Agenda.apps.AgendaConfig',
     'rest_framework',
+    'django_filters'
 ]
 
 MIDDLEWARE = [

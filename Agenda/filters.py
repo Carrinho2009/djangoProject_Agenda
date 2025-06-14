@@ -1,6 +1,6 @@
 import django_filters
 
-from Agenda.models import Contato, Email, Telefone, Emergencia
+from Agenda.models import Contato, Email, Telefone
 
 
 class ContatoFilter(django_filters.FilterSet):
@@ -21,15 +21,15 @@ class EmailFilter(django_filters.FilterSet):
 
 class TelefoneFilter(django_filters.FilterSet):
     codigo_telefone= django_filters.CharFilter(lookup_expr='exact')
-    Numerotelefone = django_filters.CharFilter(lookup_expr='exact')
+    NumeroTelefone = django_filters.CharFilter(lookup_expr='exact')
 
     class Meta:
         model = Telefone
         fields = ['codigo_telefone', 'NumeroTelefone']
 
-class EmergenciaFilter(django_filters.FilterSet):
-    Parentesco = django_filters.CharFilter(lookup_expr='exact')
-
-    class Meta:
-        model = Emergencia
-        fields = ['Parentesco']
+# class EmergenciaFilter(django_filters.FilterSet):
+#     Parentesco = django_filters.CharFilter(lookup_expr='exact')
+#
+#     class Meta:
+#         model = Emergencia
+#         fields = ['Parentesco']

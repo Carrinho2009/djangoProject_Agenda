@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from Agenda.models import Contato, Email, Telefone, Emergencia
+from Agenda.models import Contato, Email, Telefone
 
 class ContatoSerializers(serializers.ModelSerializer):
     name = serializers.CharField(max_length=70)
@@ -19,16 +19,20 @@ class EmailSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 class TelefoneSerializers(serializers.ModelSerializer):
+    contato = ContatoSerializers(read_only=True)
+    contato_id = serializers.PrimaryKeyRelatedField(queryset=Contato.objects.all(), source='contato', write_only=True)
+    email = EmailSerializers(read_only=True)
+    email_id = serializers.PrimaryKeyRelatedField(queryset=Email.objects.all(), source='email', write_only=True)
     codigo_telefone = serializers.CharField(min_length=2,max_length=2)
-    Numerotelefone = serializers.CharField(min_length=11,max_length=11)
+    NumeroTelefone = serializers.CharField(min_length=11,max_length=11)
 
     class Meta:
         model = Telefone
         fields = '__all__'
 
-class EmergenciaSerializers(serializers.ModelSerializer):
-    Parentesco = serializers.CharField(min_length=2,max_length=2)
-
-    class Meta:
-        model = Emergencia
-        fields = '__all__'
+# class EmergenciaSerializers(serializers.ModelSerializer):
+#     Parentesco = serializers.CharField(min_length=2,max_length=2)
+#
+#     class Meta:
+#         model = Emergencia
+#         fields = '__all__'
